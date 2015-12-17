@@ -33,10 +33,10 @@ task 'setup', sub {
 			ensure    => "latest",
 			on_change => sub { say "package was installed/updated"; };
 
-		service salt-minion => "restart";
+		service "salt-minion" => "restart";
  	};
 
-	service salt-minion => ensure => "started";
+	service "salt-minion" => ensure => "started";
 
 	my $finger_id = run q!/usr/bin/salt-call --local key.finger!; 
 	my $hostname = run q!hostname -f!; 
