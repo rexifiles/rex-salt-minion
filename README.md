@@ -3,6 +3,8 @@
 ## setup()
 Will add the repo and salt monion application to the designated machines. 
 
+You need to pass the fingerprint of the master. 
+
 ## clean()
 Will remove the salt package
 
@@ -10,7 +12,7 @@ Will remove the salt package
 ```
 task "setup", make {
 
-  Rex::Salt::Minion::setup(server="SE.RV.ER.IP"); # To be decided. 
+  Rex::Salt::Minion::setup(master_finger="a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1"); 
 
 };
 ```
@@ -25,6 +27,16 @@ task "clean", make {
 
 
 # Salt minion
+
+## Pre-deployment
+You will need to pass the fingerprint ID of the master to ensure communications are as expected. 
+
+### Salt master:
+```
+salt-key -F master
+```
+This is the jey you will need. 
+
 
 ## Salt's deployed, what next?
 
