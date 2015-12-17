@@ -2,18 +2,15 @@ package Rex::Salt::Minion;
 use Rex -base;
 use Rex::Ext::ParamLookup;
 
-# Usage: rex setup master_finger=a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1
+# Usage: rex setup masterfinger=a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1
 # Usage: rex remove
-
-# Changed this deployment to use agent-auth
-
 
 desc 'Set up salt-minion agent';
 task 'setup', sub { 
 
-	my $master_finger = param_lookup "master_finger";
+	my $masterfinger = param_lookup "masterfinger";
 
-	unless ($master_finger) {
+	unless ($masterfinger) {
 		say "No master ID defined. Define master_finger=a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1";
 		exit 1;
 	};
@@ -36,7 +33,7 @@ task 'setup', sub {
  	};
 
         file "/etc/salt/minion.d/masterfinger.conf",
-               	content => template("files/etc/minion.d/masterfinger.tmpl", conf => { master_finger => "$master_finger" }),
+               	content => template("files/etc/minion.d/masterfinger.tmpl", conf => { master_finger => "$masterfinger" }),
                	on_change => sub { 
                        	say "master fingerprint installed/updated. ";
                        	service "salt-minion" => "restart";
@@ -44,9 +41,9 @@ task 'setup', sub {
 
 	service "salt-minion" => ensure => "started";
 
-	my $finger_id = run q!/usr/bin/salt-call --local key.finger!; 
-	my $hostname = run q!hostname -f!; 
-	say "$hostname : $finger_id";
+	# my $finger_id = run q!/usr/bin/salt-call --local key.finger!; 
+	# my $hostname = run q!hostname -f!; 
+	# say "$hostname : $finger_id";
 };
 
 desc 'Remove salt-minion agent';

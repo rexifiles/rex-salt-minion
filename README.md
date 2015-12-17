@@ -12,7 +12,7 @@ Will remove the salt package
 ```
 task "setup", make {
 
-  Rex::Salt::Minion::setup(master_finger="a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1"); 
+  Rex::Salt::Minion::setup(masterfinger="a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1"); 
 
 };
 ```
