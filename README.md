@@ -25,7 +25,12 @@ task "clean", make {
 
 
 # Salt minion
-The salt minion repository and package will be installed. Configuration to come afterwards. 
+
+## Salt's deployed, what next?
+
+Once the salt monion is deployed, the first thing it does is try to resolve "salt" from DNS. In the event you're not able to add 
+in the name to your namesevers, you'll want to add in the entry to the "/etc/hosts" directory. 
+
 ```
 N/A
 ```

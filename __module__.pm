@@ -33,10 +33,10 @@ task 'setup', sub {
 			ensure    => "latest",
 			on_change => sub { say "package was installed/updated"; };
 
-		service saltminion => "restart";
+		service salt-minion => "restart";
  	};
 
-	service saltminion => ensure => "started";
+	service salt-minion => ensure => "started";
 
 	my $finger_id = run q!/usr/bin/salt-call --local key.finger!; 
 	my $hostname = run q!hostname -f!; 
@@ -47,7 +47,7 @@ desc 'Remove salt-minion agent';
 task 'clean', sub {
 
 	if ( is_installed("salt-minion") ) {
-		service saltminion => "stopped";
+		service salt-minion => "stopped";
 		remove package => "salt-minion";
 		repository remove => "salt";
 	};
