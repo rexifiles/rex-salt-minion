@@ -33,7 +33,7 @@ task 'setup', sub {
  	};
 
         file "/etc/salt/minion.d/masterfinger.conf",
-               	content => template("files/etc/minion.d/masterfinger.tmpl", conf => { master_finger => "$masterfinger" }),
+               	content => template("files/etc/minion.d/masterfinger.tmpl", conf => { masterfinger => "$masterfinger" }),
                	on_change => sub { 
                        	say "master fingerprint installed/updated. ";
                        	service "salt-minion" => "restart";
