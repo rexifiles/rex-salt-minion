@@ -22,7 +22,7 @@ task 'setup', sub {
 
 		repository "add" => "salt",
 			url      => "http://repo.saltstack.com/apt/debian/8/amd64/latest",
-			key_url  => "http://ossec.wazuh.com/repos/apt/conf/ossec-key.gpg.key",
+			key_url  => "https://repo.saltstack.com/apt/debian/8/amd64/latest/SALTSTACK-GPG-KEY.pub",
 			distro    => "jessie",
 			repository => "main",
 			source    => 0;
