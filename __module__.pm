@@ -47,7 +47,7 @@ desc 'Remove salt-minion agent';
 task 'clean', sub {
 
 	if ( is_installed("salt-minion") ) {
-		service salt-minion => "stopped";
+		service "salt-minion" => "stopped";
 		remove package => "salt-minion";
 		repository remove => "salt";
 	};
