@@ -40,7 +40,7 @@ task 'setup', sub {
                	on_change => sub { 
                        	say "master fingerprint added or updated. ";
                        	service "salt-minion" => "restart";
-			}
+			};
 
 	service "salt-minion" => ensure => "started";
 
