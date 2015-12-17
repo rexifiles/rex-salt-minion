@@ -1,0 +1,17 @@
+use Rex -feature => ['1.0'];
+use Rex::Ext::ParamLookup;
+
+include qw/
+  Rex::Salt::Minion
+  /;
+
+set connection => 'OpenSSH';
+user 'root';
+
+task "setup", make {
+
+  Rex::Salt::Minion::clean();
+  Rex::Salt::Minion::setup(); # server=>"10.10.10.10");
+
+};
+

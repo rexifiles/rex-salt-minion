@@ -1,0 +1,6 @@
+Name: Rex::Salt::Minion
+Description: Deploys the Salt agent across machines
+Author: xarlos <xarlos@xarlos.me>
+License: Apache 2.0
+Require:
+  - Rex::Ext::ParamLookup
