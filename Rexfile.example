@@ -11,7 +11,7 @@ user 'root';
 task "setup", make {
 
   Rex::Salt::Minion::clean();
-  Rex::Salt::Minion::setup(); # server=>"10.10.10.10");
+  Rex::Salt::Minion::setup( master_finger => "a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1");
 
 };
 

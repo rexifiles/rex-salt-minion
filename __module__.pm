@@ -2,7 +2,7 @@ package Rex::Salt::Minion;
 use Rex -base;
 use Rex::Ext::ParamLookup;
 
-# Usage: rex setup # server=192.1.2.3
+# Usage: rex setup master_finger=a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1
 # Usage: rex remove
 
 # Changed this deployment to use agent-auth
@@ -11,12 +11,12 @@ use Rex::Ext::ParamLookup;
 desc 'Set up salt-minion agent';
 task 'setup', sub { 
 
-	# my $server = param_lookup "server";
+	my $master_finger = param_lookup "master_finger";
 
-	# unless ($server) {
-		# say "No server defined. Define server=10.10.10.10";
-		# exit 1;
-	# };
+	unless ($master_finger) {
+		say "No master ID defined. Define master_finger=a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1:a1";
+		exit 1;
+	};
 
 	unless ( is_installed("salt-minion") ) {
 
@@ -33,8 +33,14 @@ task 'setup', sub {
 			ensure    => "latest",
 			on_change => sub { say "package was installed/updated"; };
 
-		service "salt-minion" => "restart";
  	};
+
+        file "/etc/salt/minion.d/masterfinger.conf",
+               	content => template("files/etc/minion.d/masterfinger.tmpl", conf => { master_finger => "$master_finger" }),
+               	on_change => sub { 
+                       	say "master fingerprint added/updated. ";
+                       	service "salt-minion => "restart";
+			}
 
 	service "salt-minion" => ensure => "started";
 
