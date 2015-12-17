@@ -37,6 +37,10 @@ task 'setup', sub {
  	};
 
 	service saltminion => ensure => "started";
+
+	my $finger_id = run q!/usr/bin/salt-call --local key.finger!; 
+	my $hostname = run q!hostname -f!; 
+	say "$hostname : $finger_id";
 };
 
 desc 'Remove salt-minion agent';
