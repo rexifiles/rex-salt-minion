@@ -17,6 +17,9 @@ task 'setup', sub {
 
 	unless ( is_installed("salt-minion") ) {
 
+                # Temporary, as the certs are not trusted (TEMP PROBLEM)
+                run qq!wget --no-check-certificate -O - https://repo.saltstack.com/apt/debian/8/amd64/latest/SALTSTACK-GPG-KEY.pub | apt-key add -!;
+
 		repository "add" => "salt",
 			url      => "http://repo.saltstack.com/apt/debian/8/amd64/latest",
 			key_url  => "https://repo.saltstack.com/apt/debian/8/amd64/latest/SALTSTACK-GPG-KEY.pub",
